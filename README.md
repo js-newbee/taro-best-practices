@@ -21,7 +21,7 @@ alias: {
 @import "@styles/theme.scss";
 ```
 
-还需要额外的配置（Taro 对样式的处理是先经过 node-sass，再走 postcss，因此不能用 postcss 的 postcss-import 插件来解决）：
+还需要额外的配置（Taro 对样式的处理是 node-sass -> postcss，在 sass 这步就报错了，不能用 postcss-import 插件解决）：
 
 ``` js
 plugins: {
