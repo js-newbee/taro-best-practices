@@ -4,7 +4,7 @@
 
 ## 设置路径别名 alias
 
-Taro v1.2.0 版本已支持设置路径别名
+Taro v1.2.0 版本已支持设置路径别名
 
 ``` js
 const path = require('path')
