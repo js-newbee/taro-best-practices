@@ -37,3 +37,16 @@ plugins: {
 ```
 
 备注：目前资源引用时仍无法使用别名，如 `background: url('@assets/logo.png')`，解决中
+
+
+## 通过环境变量实现 config 的多元控制
+
+通过 `npm run dev`、`npm run build` 等命令可以区分 config，如果在某环境下还需要实现进一步区分，可以在 package.json 中的 scripts 加入环境变量
+
+``` js
+"scripts": {
+  "dev:weapp:mock": "MOCK=1 npm run dev:weapp"
+}
+```
+
+`MOCK=1` 可以在 config 中通过 `process.env.MOCK` 访问到
