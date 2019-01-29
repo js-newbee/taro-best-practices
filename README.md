@@ -1,12 +1,18 @@
 # taro-best-practices
 
-使用 Taro 开发微信小程序的最佳实践
+使用 Taro 开发微信小程序、编译 H5 + React Native 的最佳实践
+
+鉴于只开发微信小程序跟实现多端编译需要考虑的点有所不同，将这两部分内容进行了拆分：
+
+* 使用 Taro 开发微信小程序的最佳实践（本页面）
+* [使用 Taro 编译小程序 + H5 + React Native 的最佳实践](https://github.com/js-newbee/taro-best-practices/multi-platform/README.md)
 
 ## 设置路径别名 alias
 
 Taro v1.2.0 版本已支持设置路径别名
 
 ``` js
+// config/index.js
 const path = require('path')
 // ...
 alias: {
@@ -15,7 +21,7 @@ alias: {
 }
 ```
 
-但若要在 Sass 中使用别名，如：
+但若要在 Sass 中使用别名，如 `@styles` 指向 `src/styles`：
 
 ``` sass
 @import "@styles/theme.scss";
@@ -24,6 +30,7 @@ alias: {
 还需要额外的配置（Taro 对样式的处理是 node-sass -> postcss，在 sass 这步就报错了，不能用 postcss-import 插件解决）：
 
 ``` js
+// config/index.js
 plugins: {
   sass: {
     importer: function(url) {
