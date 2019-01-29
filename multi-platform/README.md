@@ -55,7 +55,7 @@ button {
 </View> 
 ```
 
-之所以选用这样的方案，是基于微信小程序、RN 自身的限制及 Taro 目前支持的程度所作出的妥协，具体可参考 [Taro 在微信小程序、RN 上的样式局限](https://github.com/js-newbee/taro-best-practices/docs/style.md) 中的详细说明，在此不展开。
+之所以选用这样的方案，是基于微信小程序、RN 自身的限制及 Taro 目前支持的程度所作出的妥协，具体可参考 [Taro 在微信小程序、RN 上的样式局限](../docs/style.md) 中的详细说明，在此不展开。
 
 ## 支付宝小程序
 

@@ -5,7 +5,7 @@
 鉴于只开发微信小程序跟实现多端编译需要考虑的点有所不同，将这两部分内容进行了拆分：
 
 * 使用 Taro 开发微信小程序的最佳实践（本页面）
-* [使用 Taro 编译小程序 + H5 + React Native 的最佳实践](https://github.com/js-newbee/taro-best-practices/multi-platform/README.md)
+* [使用 Taro 编译小程序 + H5 + React Native 的最佳实践](./multi-platform)
 
 ## 设置路径别名 alias
 
