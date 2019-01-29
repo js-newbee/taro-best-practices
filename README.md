@@ -1,6 +1,6 @@
 # taro-best-practices
 
-使用 Taro 开发微信小程序、编译 H5 + React Native 的最佳实践
+使用 [Taro](https://github.com/NervJS/taro) 开发微信小程序、编译 H5 + React Native 的最佳实践
 
 鉴于只开发微信小程序跟实现多端编译需要考虑的点有所不同，将这两部分内容进行了拆分：
 

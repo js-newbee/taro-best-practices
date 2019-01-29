@@ -1,7 +1,5 @@
 # 使用 Taro 编译小程序 + H5 + React Native 的最佳实践
 
-[Taro](https://github.com/NervJS/taro) 编译小程序 + H5 + React Native 的最佳实践
-
 实际上，用 Taro 要做到适配 H5 还算容易，但要适配 React Native 的难度是很大的，举一例子：[Taro UI](https://github.com/NervJS/taro-ui)（Taro 团队出的组件库）至今仍未支持 RN。但也不是说适配 RN 完全不可能，坑总是要踩的，经验是实践出来的。
 
 ## 样式管理
