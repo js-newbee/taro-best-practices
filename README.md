@@ -7,6 +7,11 @@
 * 使用 Taro 开发微信小程序的最佳实践（本页面）
 * [使用 Taro 编译小程序 + H5 + React Native 的最佳实践](./multi-platform)
 
+## 目录
+
+* [设置路径别名 alias](#设置路径别名-alias)
+* [通过环境变量实现 config 的多元控制](#通过环境变量实现-config-的多元控制)
+
 ## 设置路径别名 alias
 
 Taro v1.2.0 版本已支持设置路径别名

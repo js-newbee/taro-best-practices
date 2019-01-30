@@ -2,6 +2,14 @@
 
 实际上，用 Taro 要做到适配 H5 还算容易，但要适配 React Native 的难度是很大的，举一例子：[Taro UI](https://github.com/NervJS/taro-ui)（Taro 团队出的组件库）至今仍未支持 RN。但也不是说适配 RN 完全不可能，坑总是要踩的，经验是实践出来的。
 
+## 目录
+
+* [样式管理](#样式管理)
+* [H5](#h5)
+    * [打包静态资源带 hash 值](#打包静态资源带-hash-值)
+* [支付宝小程序](#支付宝小程序)
+    * [网络请求](#网络请求)
+
 ## 样式管理
 
 样式是实现多端编译的核心挑战，因为 RN 端的样式只是实现了 CSS 的一个子集，具体可参考 [React-Native 样式指南](https://github.com/doyoe/react-native-stylesheet-guide)。
