@@ -6,6 +6,7 @@
 
 * [样式管理](#样式管理)
 * [H5](#h5)
+    * [跨域](#跨域)
     * [打包静态资源带 hash 值](#打包静态资源带-hash-值)
 * [支付宝小程序](#支付宝小程序)
     * [网络请求](#网络请求)
@@ -73,6 +74,38 @@ button {
 之所以选用这样的方案，是基于微信小程序、RN 自身的限制及 Taro 目前支持的程度所作出的妥协，具体可参考 [Taro 在微信小程序、RN 上的样式局限](../docs/style.md) 中的详细说明，在此不展开。
 
 ## H5
+
+### 跨域
+
+跨域最好的解决方案是设置 CORS，如果没有条件，在开发时要解决跨域问题可以配置 devServer 的 proxy：
+
+``` js
+// config/dev.js
+
+// 需要把 package.json 中 scripts 的 "dev:h5": "..." 改成：
+// "dev:h5": "CLIENT_ENV=h5 npm run build:h5 -- --watch"
+const isH5 = process.env.CLIENT_ENV === 'h5'
+const HOST = '"http://xxx"'
+
+module.exports = {
+  defineConstants: {
+    HOST: isH5 ? '"/api"' : HOST
+  },
+  h5: {
+    devServer: {
+      proxy: {
+        '/api/': {
+          target: JSON.parse(HOST),
+          pathRewrite: {
+            '^/api/': '/'
+          },
+          changeOrigin: true
+        }
+      }
+    }
+  }
+}
+```
 
 ### 打包静态资源带 hash 值
 
