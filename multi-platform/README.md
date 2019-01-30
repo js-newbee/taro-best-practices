@@ -64,6 +64,43 @@ button {
 
 之所以选用这样的方案，是基于微信小程序、RN 自身的限制及 Taro 目前支持的程度所作出的妥协，具体可参考 [Taro 在微信小程序、RN 上的样式局限](../docs/style.md) 中的详细说明，在此不展开。
 
+## H5
+
+### 打包静态资源带 hash 值
+
+Taro 编译 H5 时静态资源是固定的文件名：
+
+``` html
+<!-- css -->
+<link href="/css/app.css" rel="stylesheet"></head>
+
+<!-- js -->
+<script type="text/javascript" src="/js/app.js"></script>
+
+<!-- 图片 -->
+background:url(/static/images/bg.png)
+```
+
+但这样不利于缓存、版本控制，建议配置 webpack 给静态资源带上 hash：
+
+``` js
+// config/index.js
+h5: {
+  publicPath: '/',
+  staticDirectory: 'static',
+  output: {
+    filename: 'js/[name].[chunkhash].js'
+  },
+  imageUrlLoaderOption: {
+    limit: 5000,
+    name: 'static/images/[name].[hash].[ext]'
+  },
+  miniCssExtractPluginOption: {
+    filename: 'css/[name].[hash].css',
+  }
+}
+```
+
 ## 支付宝小程序
 
 ### 网络请求
