@@ -41,6 +41,15 @@ button {
 .comp__list-item--last {}
 ```
 
+对于第 3 点，是由于 RN 不支持 background-image，需要使用 Image 标签配合 postion 实现
+
+```js
+// 建议自行封装个 ImageBackground 组件解决此类需求
+<View>
+  <Image style={{ position: 'absolute' }} />
+</View>
+```
+
 最后，对于需要覆盖组件样式的情况，建议使用 style：
 
 ``` js
