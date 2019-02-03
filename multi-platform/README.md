@@ -13,14 +13,15 @@
 
 ## 样式管理
 
-样式是实现多端编译的核心挑战，因为 RN 端的样式只是实现了 CSS 的一个子集，具体可参考 [React-Native 样式指南](https://github.com/doyoe/react-native-stylesheet-guide)。
+样式是实现多端编译的核心挑战，因为 RN 端的样式只是实现了 CSS 的一个子集，具体可参考 [React-Native 样式指南](https://github.com/doyoe/react-native-stylesheet-guide)（这个指南的版本有点旧了，内容不一定准确）。
 
 因此，要做到适配 RN，首先得遵循 React Native 的约束：
 
 1. 只用 flex 布局
 2. 只用 class 选择器，不用标签、子代、伪类等选择器
-3. 图片统一用 Image 标签引入，不用 background 的方式
-4. 文本要用 Text 标签包裹，文本的样式要加在 Text 标签上
+3. 样式单位只使用 px，部分属性支持 %（[相关说明](https://github.com/facebook/react-native/commit/3f49e743bea730907066677c7cbfbb1260677d11)）
+4. 图片统一用 Image 标签引入，不用 background 的方式
+5. 文本要用 Text 标签包裹，文本的样式要加在 Text 标签上
 
 对于第 1 点只用 flex 布局，可以在 app.scss 中加入全局样式，让微信小程序与 RN 保持一致：
 
