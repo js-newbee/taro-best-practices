@@ -24,14 +24,21 @@
 4. 图片统一用 Image 标签引入，不用 background 的方式
 5. 文本要用 Text 标签包裹，文本的样式要加在 Text 标签上
 
-对于第 1 点只用 flex 布局，可以在 app.scss 中加入全局样式，让微信小程序与 RN 保持一致：
+对于第 1 点只用 flex 布局，需要注意 RN 的 View 标签有如下默认样式：
 
-``` scss
-/* RN 中 View 标签的默认样式 */
+``` css
 view {
   display: flex;
   flex-direction: column;
   position: relative;
+  box-sizing: border-box;
+}
+```
+
+其中 flex 的主轴与 Web 默认值不一致，因此凡是用到 `display: flex` 的地方都需要声明主轴，且需要设置部分全局样式：
+
+``` scss
+view, div {
   box-sizing: border-box;
 }
 
