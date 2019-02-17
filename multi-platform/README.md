@@ -137,15 +137,14 @@ background:url(/static/images/bg.png)
 
 但这样不利于缓存、版本控制，建议配置 webpack 给静态资源带上 hash：
 
-!!! TODO 下面的配置有点问题，需要改进
-
 ``` js
 // config/index.js
 h5: {
   publicPath: '/',
   staticDirectory: 'static',
   output: {
-    filename: 'js/[name].[chunkhash].js'
+    filename: 'js/[name].[hash].js',
+    chunkFilename: 'js/[name].[chunkhash].js'
   },
   imageUrlLoaderOption: {
     limit: 5000,
@@ -153,6 +152,7 @@ h5: {
   },
   miniCssExtractPluginOption: {
     filename: 'css/[name].[hash].css',
+    chunkFilename: 'css/[name].[chunkhash].css'
   }
 }
 ```
