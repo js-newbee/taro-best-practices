@@ -1,10 +1,11 @@
 # 使用 Taro 编译小程序 + H5 + React Native 的最佳实践
 
-实际上，用 Taro 要做到适配 H5 还算容易，但要适配 React Native 的难度是很大的，举一例子：[Taro UI](https://github.com/NervJS/taro-ui)（Taro 团队出的组件库）至今仍未支持 RN。但也不是说适配 RN 完全不可能，坑总是要踩的，经验是实践出来的。
+本页内容多数整理自趣店 FED 开源的首个 Taro 多端统一实例 - 网易严选（小程序 + H5 + React Native）- <https://github.com/js-newbee/taro-yanxuan>。
 
 ## 目录
 
 * [样式管理](#样式管理)
+    * [fixed 定位的实现](#fixed-定位的实现)
 * [H5](#h5)
     * [路径别名](#路径别名)
     * [跨域](#跨域)
@@ -81,6 +82,40 @@ button {
 ```
 
 之所以选用这样的方案，是基于微信小程序、RN 自身的限制及 Taro 目前支持的程度所作出的妥协，具体可参考 [Taro 在微信小程序、RN 上的样式局限](../docs/style.md) 中的详细说明，在此不展开。
+
+### fixed 定位的实现
+
+由于 RN 不支持 fixed 定位，有 fixed 定位的场景就需要改用 ScrollView + absolute 实现：
+
+``` js
+<View style={{ position: 'relative' }}>
+  <ScrollView style={{ height: 'xxx' }}>内容区域</ScrollView>
+  <View style={{ position: 'absolute' }}>固定区域</View>
+</View>
+```
+
+内容区域需要用到 ScrollView，而 ScrollView 又需要设置高度，就需要去计算页面可用高度，但该值在各端上不太一致，需要根据 systemInfo 进行二次计算
+
+``` js
+// 各端返回的 windowHeight 不一定是最终可用高度（例如可能没减去 statusBar 的高度），需二次计算
+const NAVIGATOR_HEIGHT = 44
+const TAB_BAR_HEIGHT = 50
+function getWindowHeight(showTabBar = true) {
+  const info = Taro.getSystemInfoSync()
+  const { windowHeight, statusBarHeight, titleBarHeight } = info
+  const tabBarHeight = showTabBar ? TAB_BAR_HEIGHT : 0
+
+  if (process.env.TARO_ENV === 'rn') {
+    return windowHeight - statusBarHeight - NAVIGATOR_HEIGHT - tabBarHeight
+  }
+
+  if (process.env.TARO_ENV === 'h5') {
+    return `${windowHeight - tabBarHeight}px`
+  }
+
+  return `${windowHeight}px`
+}
+```
 
 ## H5
 
@@ -161,7 +196,7 @@ h5: {
 
 ### 网络请求
 
-支付宝小程序的网络请求默认的 content-type 是 application/x-www-form-urlencoded，若将 content-type 设置为 application/json，还需要手动将 data 转为字符串，否则会出现开发者工具中网络请求正常，但体验版网络请求异常的情况
+（有待验证新版本是否已解决了该问题）支付宝小程序的网络请求默认的 content-type 是 application/x-www-form-urlencoded，若将 content-type 设置为 application/json，还需要手动将 data 转为字符串，否则会出现开发者工具中网络请求正常，但体验版网络请求异常的情况
 
 ``` js
 Taro.request({
