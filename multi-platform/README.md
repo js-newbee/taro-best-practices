@@ -6,6 +6,7 @@
 
 * [样式管理](#样式管理)
     * [fixed 定位的实现](#fixed-定位的实现)
+* [差异兼容](#差异兼容)
 * [H5](#h5)
     * [路径别名](#路径别名)
     * [跨域](#跨域)
@@ -116,6 +117,39 @@ function getWindowHeight(showTabBar = true) {
   return `${windowHeight}px`
 }
 ```
+
+## 差异兼容
+
+Taro 的差异处理一般是使用 `process.env.TARO_ENV` 进行判断，在编译时会自动去掉非当前编译环境的内容：
+
+``` js
+//  源代码
+if (process.env.TARP_ENV === 'weapp') { // 微信小程序
+  console.log(1)
+} else if (process.env.TARP_ENV === 'alipay') { // 支付宝小程序
+  console.log(2)
+}
+
+// 例如编译支付宝小程序时，编译之后的代码
+{
+  console.log(2)
+}
+```
+
+另外一种情况，则是要根据不同环境引入不同组件，Taro 有引入了 Tree skaing，配合上述环境判断方式，很方便能够实现：
+
+``` js
+import Comp from './comp'
+import CompAlipay from './comp.alipay'
+
+render() {
+  return (
+    process.env.TARO_ENV === 'alipay' ? <CompAlipay /> : <Comp />
+  )
+}
+```
+
+当编译成支付宝小程序时，只会保留 CompAlipay 组件，不会将 Comp 引入，也就避免引入了其他端不支持的内容。 
 
 ## H5
 
